@@ -8,3 +8,5 @@ peft
 accelerate
 sentencepiece
 transformers-cfg
+fastapi
+uvicorn
