@@ -103,4 +103,5 @@ def build_prompt(example):
     headers = _get_headers(example)
     schema = ", ".join(headers)
     question = example["question"]
-    return f"Translate question to SQL. Question: {question} Schema: {schema}"
+    table_id = _get_table_id(example)
+    return f"Translate question to SQL. Question: {question} Table: {table_id} Schema: {schema}"

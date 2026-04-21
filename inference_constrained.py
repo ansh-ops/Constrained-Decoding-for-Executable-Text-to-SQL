@@ -1,13 +1,18 @@
 import torch
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import AutoTokenizer, T5ForConditionalGeneration
+from peft import PeftModel
 from constrained_decoding import make_prefix_allowed_tokens_fn
 from data_utils import load_wikisql, build_prompt, build_wikisql_sql, _get_headers, _get_table_id
+from model_config import BASE_MODEL_NAME, FINETUNED_MODEL_DIR
 
-MODEL_PATH = "outputs/t5_wikisql_midterm/final"
 
-
-def constrained_generate(model, tokenizer, prompt, columns, table_name, device):
-    prefix_fn = make_prefix_allowed_tokens_fn(tokenizer, columns, table_name)
+def constrained_generate(model, tokenizer, prompt, question, columns, table_name, device):
+    prefix_fn = make_prefix_allowed_tokens_fn(
+        tokenizer,
+        columns,
+        table_name,
+        question=question,
+    )
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True).to(device)
 
     outputs = model.generate(
@@ -22,8 +27,9 @@ def main():
     dataset = load_wikisql()
     val_ds = dataset["validation"]
 
-    tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
-    model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+    tokenizer = AutoTokenizer.from_pretrained(FINETUNED_MODEL_DIR, use_fast=True, legacy=True)
+    base_model = T5ForConditionalGeneration.from_pretrained(BASE_MODEL_NAME)
+    model = PeftModel.from_pretrained(base_model, FINETUNED_MODEL_DIR)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)
@@ -35,7 +41,15 @@ def main():
         columns = _get_headers(ex)
         table_name = _get_table_id(ex)
 
-        pred = constrained_generate(model, tokenizer, prompt, columns, table_name, device)
+        pred = constrained_generate(
+            model,
+            tokenizer,
+            prompt,
+            ex["question"],
+            columns,
+            table_name,
+            device,
+        )
 
         print("QUESTION:", ex["question"])
         print("PRED:", pred)

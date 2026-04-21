@@ -1,0 +1,15 @@
+{
+  "eval_examples": 100,
+  "temperatures": [
+    0.0,
+    0.3,
+    0.7,
+    1.0
+  ],
+  "checkpoint_runs": [
+    "checkpoint-500",
+    "checkpoint-1000",
+    "checkpoint-1500"
+  ],
+  "final_model_dir": "outputs/t5_wikisql_midterm/final"
+}

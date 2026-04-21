@@ -1,6 +1,10 @@
+numpy<2
 torch
 transformers
 datasets
+pandas
+matplotlib
 peft
 accelerate
 sentencepiece
+transformers-cfg

@@ -1,8 +1,7 @@
 import torch
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import AutoTokenizer, T5ForConditionalGeneration
 from data_utils import load_wikisql, build_prompt, build_wikisql_sql
-
-MODEL_NAME = "t5-small"
+from model_config import BASE_MODEL_NAME
 
 
 def generate_sql(model, tokenizer, prompt, device, max_new_tokens=64):
@@ -15,8 +14,8 @@ def main():
     dataset = load_wikisql()
     val_ds = dataset["validation"]
 
-    tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
-    model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_NAME, use_fast=True, legacy=True)
+    model = T5ForConditionalGeneration.from_pretrained(BASE_MODEL_NAME)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)

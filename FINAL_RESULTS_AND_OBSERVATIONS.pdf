@@ -1,0 +1,418 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 2571 >>
+stream
+BT
+/F2 18 Tf
+1 0 0 1 54 738 Tm
+(Constrained Decoding for Executable Text-to-SQL) Tj
+/F2 14 Tf
+1 0 0 1 54 688 Tm
+(Title and Motivation) Tj
+/F1 11 Tf
+1 0 0 1 54 656 Tm
+(This project studies whether constrained decoding can improve text-to-SQL generation by) Tj
+/F1 11 Tf
+1 0 0 1 54 641 Tm
+(forcing outputs to stay closer to valid WikiSQL query structure. The motivation is) Tj
+/F1 11 Tf
+1 0 0 1 54 626 Tm
+(practical: a fine-tuned language model may still generate malformed SQL, hallucinated schema) Tj
+/F1 11 Tf
+1 0 0 1 54 611 Tm
+(items, or invalid clause structures. Constrained decoding is meant to reduce those failures) Tj
+/F1 11 Tf
+1 0 0 1 54 596 Tm
+(by limiting what the model can output at generation time.) Tj
+/F2 14 Tf
+1 0 0 1 54 567 Tm
+(Task Definition and Proposed Method) Tj
+/F1 11 Tf
+1 0 0 1 54 535 Tm
+(The task is natural-language question to SQL generation on WikiSQL. We compare four) Tj
+/F1 11 Tf
+1 0 0 1 54 520 Tm
+(settings:) Tj
+/F1 11 Tf
+1 0 0 1 54 491 Tm
+(- Base model) Tj
+/F1 11 Tf
+1 0 0 1 54 476 Tm
+(- Fine-tuned model) Tj
+/F1 11 Tf
+1 0 0 1 54 461 Tm
+(- Base model with constrained decoding) Tj
+/F1 11 Tf
+1 0 0 1 54 446 Tm
+(- Fine-tuned model with constrained decoding) Tj
+/F1 11 Tf
+1 0 0 1 54 417 Tm
+(The base model is `google/flan-t5-base`. Fine-tuning is done with LoRA adapters using PEFT.) Tj
+/F1 11 Tf
+1 0 0 1 54 402 Tm
+(The constrained method restricts decoding to a tighter WikiSQL-style SQL template so the) Tj
+/F1 11 Tf
+1 0 0 1 54 387 Tm
+(output stays closer to `SELECT ... FROM ... [WHERE ...];` forms using schema-aware columns,) Tj
+/F1 11 Tf
+1 0 0 1 54 372 Tm
+(the correct table id, and restricted operators.) Tj
+/F2 14 Tf
+1 0 0 1 54 343 Tm
+(Experimental Setup) Tj
+/F1 11 Tf
+1 0 0 1 54 311 Tm
+(- Dataset: WikiSQL) Tj
+/F1 11 Tf
+1 0 0 1 54 296 Tm
+(- Base model: `google/flan-t5-base`) Tj
+/F1 11 Tf
+1 0 0 1 54 281 Tm
+(- Fine-tuning method: LoRA / PEFT) Tj
+/F1 11 Tf
+1 0 0 1 54 266 Tm
+(- Training subset: 2,000 train examples) Tj
+/F1 11 Tf
+1 0 0 1 54 251 Tm
+(- Validation subset: 300 examples) Tj
+/F1 11 Tf
+1 0 0 1 54 236 Tm
+(- Training epochs: 3) Tj
+/F1 11 Tf
+1 0 0 1 54 221 Tm
+(- Evaluation set: 100 test examples) Tj
+/F1 11 Tf
+1 0 0 1 54 206 Tm
+(- Temperatures: 0.0, 0.3, 0.7, 1.0) Tj
+/F1 11 Tf
+1 0 0 1 54 177 Tm
+(Metrics:) Tj
+/F1 11 Tf
+1 0 0 1 54 148 Tm
+(- Syntactic validity) Tj
+/F1 11 Tf
+1 0 0 1 54 133 Tm
+(- Exact match accuracy) Tj
+/F1 11 Tf
+1 0 0 1 54 118 Tm
+(- Component accuracies:) Tj
+/F1 11 Tf
+1 0 0 1 54 103 Tm
+(- aggregation) Tj
+/F1 11 Tf
+1 0 0 1 54 88 Tm
+(- selected column) Tj
+/F1 11 Tf
+1 0 0 1 54 73 Tm
+(- table name) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 2174 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 738 Tm
+(- where column) Tj
+/F1 11 Tf
+1 0 0 1 54 723 Tm
+(- where operator) Tj
+/F1 11 Tf
+1 0 0 1 54 708 Tm
+(- where value) Tj
+/F2 14 Tf
+1 0 0 1 54 679 Tm
+(Main Results) Tj
+/F2 12 Tf
+1 0 0 1 54 647 Tm
+(Training Progress) Tj
+/F1 11 Tf
+1 0 0 1 54 617 Tm
+(Training improved steadily across epochs.) Tj
+/F1 11 Tf
+1 0 0 1 54 588 Tm
+(- Early training loss at epoch 0.1: 3.3414) Tj
+/F1 11 Tf
+1 0 0 1 54 573 Tm
+(- End of epoch 1 train loss: 1.0006) Tj
+/F1 11 Tf
+1 0 0 1 54 558 Tm
+(- End of epoch 2 train loss: 0.8968) Tj
+/F1 11 Tf
+1 0 0 1 54 543 Tm
+(- End of epoch 3 train loss: 0.8510) Tj
+/F1 11 Tf
+1 0 0 1 54 514 Tm
+(Validation loss also improved:) Tj
+/F1 11 Tf
+1 0 0 1 54 485 Tm
+(- Epoch 1 eval loss: 0.7646) Tj
+/F1 11 Tf
+1 0 0 1 54 470 Tm
+(- Epoch 2 eval loss: 0.7267) Tj
+/F1 11 Tf
+1 0 0 1 54 455 Tm
+(- Epoch 3 eval loss: 0.7209) Tj
+/F1 11 Tf
+1 0 0 1 54 426 Tm
+(This shows the model learned the task and continued improving over the full 3-epoch run.) Tj
+/F2 12 Tf
+1 0 0 1 54 397 Tm
+(Final Evaluation Summary) Tj
+/F1 11 Tf
+1 0 0 1 54 367 Tm
+(At temperature 0.0:) Tj
+/F1 11 Tf
+1 0 0 1 54 338 Tm
+(- Base: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 323 Tm
+(- Fine-tuned: validity 0.72, exact match 0.29) Tj
+/F1 11 Tf
+1 0 0 1 54 308 Tm
+(- Base constrained: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 293 Tm
+(- Fine-tuned constrained: validity 0.59, exact match 0.15) Tj
+/F1 11 Tf
+1 0 0 1 54 264 Tm
+(At temperature 0.3:) Tj
+/F1 11 Tf
+1 0 0 1 54 235 Tm
+(- Base: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 220 Tm
+(- Fine-tuned: validity 0.67, exact match 0.25) Tj
+/F1 11 Tf
+1 0 0 1 54 205 Tm
+(- Base constrained: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 190 Tm
+(- Fine-tuned constrained: validity 0.59, exact match 0.16) Tj
+/F1 11 Tf
+1 0 0 1 54 161 Tm
+(At temperature 0.7:) Tj
+/F1 11 Tf
+1 0 0 1 54 132 Tm
+(- Base: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 117 Tm
+(- Fine-tuned: validity 0.54, exact match 0.18) Tj
+/F1 11 Tf
+1 0 0 1 54 102 Tm
+(- Base constrained: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 87 Tm
+(- Fine-tuned constrained: validity 0.59, exact match 0.14) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 2920 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 738 Tm
+(At temperature 1.0:) Tj
+/F1 11 Tf
+1 0 0 1 54 709 Tm
+(- Base: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 694 Tm
+(- Fine-tuned: validity 0.39, exact match 0.14) Tj
+/F1 11 Tf
+1 0 0 1 54 679 Tm
+(- Base constrained: validity 0.00, exact match 0.00) Tj
+/F1 11 Tf
+1 0 0 1 54 664 Tm
+(- Fine-tuned constrained: validity 0.56, exact match 0.13) Tj
+/F2 12 Tf
+1 0 0 1 54 635 Tm
+(Detailed Fine-Tuned Performance at Temperature 0.0) Tj
+/F1 11 Tf
+1 0 0 1 54 605 Tm
+(Fine-tuned model component accuracies:) Tj
+/F1 11 Tf
+1 0 0 1 54 576 Tm
+(- Aggregation accuracy: 0.81) Tj
+/F1 11 Tf
+1 0 0 1 54 561 Tm
+(- Select-column accuracy: 0.79) Tj
+/F1 11 Tf
+1 0 0 1 54 546 Tm
+(- Table-name accuracy: 0.83) Tj
+/F1 11 Tf
+1 0 0 1 54 531 Tm
+(- Where-column accuracy: 0.62) Tj
+/F1 11 Tf
+1 0 0 1 54 516 Tm
+(- Where-operator accuracy: 0.91) Tj
+/F1 11 Tf
+1 0 0 1 54 501 Tm
+(- Where-value accuracy: 0.66) Tj
+/F1 11 Tf
+1 0 0 1 54 472 Tm
+(Fine-tuned constrained model component accuracies:) Tj
+/F1 11 Tf
+1 0 0 1 54 443 Tm
+(- Aggregation accuracy: 0.48) Tj
+/F1 11 Tf
+1 0 0 1 54 428 Tm
+(- Select-column accuracy: 0.53) Tj
+/F1 11 Tf
+1 0 0 1 54 413 Tm
+(- Table-name accuracy: 0.60) Tj
+/F1 11 Tf
+1 0 0 1 54 398 Tm
+(- Where-column accuracy: 0.37) Tj
+/F1 11 Tf
+1 0 0 1 54 383 Tm
+(- Where-operator accuracy: 0.56) Tj
+/F1 11 Tf
+1 0 0 1 54 368 Tm
+(- Where-value accuracy: 0.31) Tj
+/F2 14 Tf
+1 0 0 1 54 339 Tm
+(Discussion) Tj
+/F1 11 Tf
+1 0 0 1 54 307 Tm
+(The clearest result is that fine-tuning substantially improves performance over the base) Tj
+/F1 11 Tf
+1 0 0 1 54 292 Tm
+(model. The base model produced no syntactically valid outputs in this evaluation subset,) Tj
+/F1 11 Tf
+1 0 0 1 54 277 Tm
+(while the fine-tuned model reached 72% syntactic validity and 29% exact match at temperature) Tj
+/F1 11 Tf
+1 0 0 1 54 262 Tm
+(0.0.) Tj
+/F1 11 Tf
+1 0 0 1 54 233 Tm
+(Temperature matters. For the fine-tuned model, both validity and exact match were best at) Tj
+/F1 11 Tf
+1 0 0 1 54 218 Tm
+(temperature 0.0 and degraded as temperature increased. This is consistent with the) Tj
+/F1 11 Tf
+1 0 0 1 54 203 Tm
+(expectation that deterministic decoding is more suitable for structured generation tasks) Tj
+/F1 11 Tf
+1 0 0 1 54 188 Tm
+(like SQL.) Tj
+/F1 11 Tf
+1 0 0 1 54 159 Tm
+(Constrained decoding produced mixed outcomes. It did not outperform the fine-tuned model.) Tj
+/F1 11 Tf
+1 0 0 1 54 144 Tm
+(However, it was more stable across temperatures: the fine-tuned constrained model stayed in) Tj
+/F1 11 Tf
+1 0 0 1 54 129 Tm
+(the 0.56 to 0.59 validity range, while the unconstrained fine-tuned model dropped from 0.72) Tj
+/F1 11 Tf
+1 0 0 1 54 114 Tm
+(at temperature 0.0 to 0.39 at temperature 1.0. This suggests constrained decoding can) Tj
+/F1 11 Tf
+1 0 0 1 54 99 Tm
+(regularize output structure, but in this implementation it restricted the model too) Tj
+/F1 11 Tf
+1 0 0 1 54 84 Tm
+(aggressively and reduced exact correctness.) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 1480 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 738 Tm
+(The main conclusion is that fine-tuning was the strongest contributor to performance, while) Tj
+/F1 11 Tf
+1 0 0 1 54 723 Tm
+(constrained decoding introduced a tradeoff: somewhat more stable structural behavior across) Tj
+/F1 11 Tf
+1 0 0 1 54 708 Tm
+(temperatures, but lower best-case validity and lower exact match than unconstrained fine-) Tj
+/F1 11 Tf
+1 0 0 1 54 693 Tm
+(tuned decoding.) Tj
+/F2 14 Tf
+1 0 0 1 54 664 Tm
+(Conclusion) Tj
+/F1 11 Tf
+1 0 0 1 54 632 Tm
+(This project demonstrates that:) Tj
+/F1 11 Tf
+1 0 0 1 54 603 Tm
+(- Fine-tuning `flan-t5-base` with LoRA is effective for WikiSQL text-to-SQL generation.) Tj
+/F1 11 Tf
+1 0 0 1 54 588 Tm
+(- Low-temperature decoding gives the strongest performance for structured SQL outputs.) Tj
+/F1 11 Tf
+1 0 0 1 54 573 Tm
+(- Constrained decoding is promising in principle, but its effectiveness depends heavily on) Tj
+/F1 11 Tf
+1 0 0 1 54 558 Tm
+(  how tightly the constraint matches the task.) Tj
+/F1 11 Tf
+1 0 0 1 54 543 Tm
+(- In our implementation, the best-performing configuration was the unconstrained fine-) Tj
+/F1 11 Tf
+1 0 0 1 54 528 Tm
+(  tuned model at temperature 0.0.) Tj
+/F1 11 Tf
+1 0 0 1 54 499 Tm
+(Overall, the project shows that model adaptation through fine-tuning is highly beneficial,) Tj
+/F1 11 Tf
+1 0 0 1 54 484 Tm
+(while constrained decoding remains a meaningful but challenging research direction for) Tj
+/F1 11 Tf
+1 0 0 1 54 469 Tm
+(executable text-to-SQL generation.) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R] /Count 4 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000002777 00000 n 
+0000002914 00000 n 
+0000005140 00000 n 
+0000005277 00000 n 
+0000008249 00000 n 
+0000008386 00000 n 
+0000009918 00000 n 
+0000010056 00000 n 
+0000010133 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+10184
+%%EOF
