@@ -72,7 +72,7 @@ def main():
         output_dir=OUTPUT_DIR,
         per_device_train_batch_size=4,
         per_device_eval_batch_size=4,
-        num_train_epochs=3,
+        num_train_epochs=7,
         learning_rate=2e-4,
         logging_steps=50,
         evaluation_strategy="epoch",

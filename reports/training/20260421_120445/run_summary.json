@@ -1,0 +1,9 @@
+{
+  "base_model_name": "google/flan-t5-base",
+  "output_dir": "outputs/t5_wikisql_midterm",
+  "num_train_epochs": 7,
+  "train_examples": 2000,
+  "validation_examples": 300,
+  "final_global_step": 3500,
+  "best_model_checkpoint": "outputs/t5_wikisql_midterm/checkpoint-3500"
+}

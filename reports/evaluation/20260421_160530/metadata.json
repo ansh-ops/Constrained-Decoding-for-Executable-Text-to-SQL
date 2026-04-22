@@ -1,0 +1,16 @@
+{
+  "eval_examples": 100,
+  "temperatures": [
+    0.0,
+    0.3,
+    0.7,
+    1.0
+  ],
+  "checkpoint_runs": [
+    "checkpoint-2500",
+    "checkpoint-3000",
+    "checkpoint-3500"
+  ],
+  "final_model_dir": "outputs/t5_wikisql_midterm/final",
+  "grammar_constraints_available": true
+}
